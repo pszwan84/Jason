@@ -1,7 +1,12 @@
-// 赞 / 评 / 交换沉淀 / 好友。纯函数，页面只接线。
+// 赞 / 评 / 交换沉淀 / 贡献换开放 / 好友。纯函数，页面只接线。
 export const MIN_COMMENT = 8;
+export const MIN_CONTRIBUTION = 8;
 
 export type SocialComment = { skillId: number; author: string; text: string };
+
+/** 贡献后开放：交一份可验证的贡献，作者通过后开放。
+ *  它不加成交热度——成交是换卡，贡献不是换卡，混在一起热度公式就说不清了。 */
+export type Contribution = { skillId: number; text: string; status: 'pending' | 'opened' };
 
 export type SocialState = {
   likedIds: number[];
@@ -9,12 +14,13 @@ export type SocialState = {
   acquiredIds: number[];
   friends: string[];
   extraExchanges: number[];
+  contributions: Contribution[];
 };
 
 export type HeatCounts = { likes: number; comments: number; exchanges: number };
 
 export function emptySocial(): SocialState {
-  return { likedIds: [], comments: [], acquiredIds: [], friends: [], extraExchanges: [] };
+  return { likedIds: [], comments: [], acquiredIds: [], friends: [], extraExchanges: [], contributions: [] };
 }
 
 export function isOwnSkill(authorId: string, myAuthorId: string): boolean {
@@ -45,6 +51,28 @@ export function completeExchange(state: SocialState, skillId: number): SocialSta
   const acquiredIds = state.acquiredIds.includes(skillId) ? state.acquiredIds : [...state.acquiredIds, skillId];
   const extraExchanges = state.extraExchanges.includes(skillId) ? state.extraExchanges : [...state.extraExchanges, skillId];
   return { ...state, acquiredIds, extraExchanges };
+}
+
+export function contributionOf(state: SocialState, skillId: number): Contribution | undefined {
+  return state.contributions.find((c) => c.skillId === skillId);
+}
+
+/** 交一份反例/交叉测试 → 待作者确认。同一张卡只收一份。 */
+export function submitContribution(state: SocialState, skillId: number, text: string): SocialState | { error: string } {
+  const trimmed = text.trim();
+  if (trimmed.length < MIN_CONTRIBUTION) return { error: `贡献至少 ${MIN_CONTRIBUTION} 个字，写清情境、做法或结果` };
+  if (contributionOf(state, skillId)) return { error: '这张卡你已经交过一份贡献了，等作者确认' };
+  return { ...state, contributions: [...state.contributions, { skillId, text: trimmed, status: 'pending' }] };
+}
+
+/** 作者通过 → 加进我的沉淀（= 开放完整步骤），不计成交热度。 */
+export function approveContribution(state: SocialState, skillId: number): SocialState {
+  if (!contributionOf(state, skillId)) return state;
+  return {
+    ...state,
+    contributions: state.contributions.map((c) => (c.skillId === skillId ? { ...c, status: 'opened' } : c)),
+    acquiredIds: state.acquiredIds.includes(skillId) ? state.acquiredIds : [...state.acquiredIds, skillId],
+  };
 }
 
 export function addFriend(state: SocialState, authorId: string, myAuthorId: string): SocialState {

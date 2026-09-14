@@ -12,5 +12,5 @@
 
 * **产品需求文档 (PRD)**：[docs/PRD-Skill-Zoo.md](docs/PRD-Skill-Zoo.md)
 * **前端工程代码**：[skill-zoo/](skill-zoo/)
-* **活跃特性分支**：`feature/skill-zoo-ui`
+* **活跃特性分支**：`feat/studio-mvp-20260914`（交接文档：[docs/HANDOFF.md](docs/HANDOFF.md)）
 

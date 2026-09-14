@@ -39,3 +39,20 @@ Deliver an offline-capable, single-browser demo with the existing six-screen vis
 - Real browser verification passes publishing, filtering, exchange review, gated access, co-creation and refresh persistence.
 - Direct navigation and browser history work, keyboard controls have accessible names, and narrow screens do not overflow.
 - The demo can be started using documented commands without API keys.
+
+---
+
+## 交付记录 — 2026-09-14（第二轮，agent）
+
+现状与实测以 `docs/HANDOFF.md` 为准；本节只记这份计划里已被交付的范围条目。
+
+| 范围条目 | 状态 | 证据 |
+|---|---|---|
+| 3 修复生命周期（发布 → 搜索 → 详情，刷新后字段保留） | 已交付 | 孵化室发布 + 刷新复测；`icon` 不再落盘（`lib/persist.ts`） |
+| 4 双边供需打分可见 | 已交付（上一轮） | 推荐弹窗展示 α/β/γ 与三项点积 |
+| 5 交换卡表单、绑定 skill、显式模拟审核与开放规则、成交进任务与族谱 | 已交付（本轮补齐开放规则分叉） | 三条门三条路；贡献解锁见 `lib/social.ts`；族谱按 `parentIds` |
+| 6 URL 支撑的屏/详情导航、后退前进、空状态、存储容错 | 已交付（本轮） | `lib/routes.ts`；`?page=…&skill=…`；popstate 还原；`isIconType` 挡住坏图标而不是清库 |
+| 7 完整演示与移动端验证、诚实的 README / 演示脚本 / 限制说明 | 已交付 | `docs/DEMO-SCRIPT.md` 1→5 + 四条新路径；400px 无横向溢出 |
+
+基线告警：`npm run lint` 仍有 35 条历史问题（a11y 与 `data.get()` 的 no-base-to-string），本轮未新增，未修。
+后端（认证 / 共享数据 / 模型密钥 / 部署）仍按上表 out of scope，未动。

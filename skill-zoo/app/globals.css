@@ -34,3 +34,27 @@
 .coach-bubble b{font-size:11px;display:block;margin-bottom:4px;color:#6a7858}
 .coach-bubble p{margin:0;font-size:12px;white-space:pre-wrap}
 
+
+/* 消息页：入站交换申请 / 我交出去的贡献。这两块之前只有裸标记，没有样式。 */
+.mail-stack{display:flex;flex-direction:column;gap:18px}
+.sent-cards{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.sent-card{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;border:1px solid #e8e9df;background:#fffefb;border-radius:11px;padding:14px 16px}
+.sent-card b{display:block;font-size:12.5px;margin-bottom:6px;color:#4c5a44;font-weight:600}
+.sent-card small{font-size:10px}
+.sent-card p{margin:6px 0 0;font-size:11px}
+.sent-card.inbound{background:#fbfcf4;border-color:#e4ead6}
+.sent-card.settled{opacity:.7}
+.letter-actions{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.letter-actions .text-button{padding:8px 0;font-size:11px}
+/* 作者页 */
+.author-link{font:inherit;font-weight:500;color:#7d896c;background:none;border:0;padding:0;text-decoration:underline dotted;text-underline-offset:3px}
+.author-link:hover{color:#566b4a}
+.author-head{display:flex;align-items:center;gap:12px;margin:6px 0 16px}
+.author-head b{font-size:14px;display:block}
+.author-head small{display:block;margin-top:4px}
+.author-head .status-pill,.author-head .outline{margin-left:auto;flex-shrink:0}
+.author-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 14px}
+.author-stats div{background:#f4f6ec;border-radius:9px;padding:10px 6px;text-align:center}
+.author-stats strong{display:block;font-size:15px;color:#4d6142}
+.author-stats span{font-size:9px;color:#8b917f;line-height:1.5}
+.author-cards{border-top:1px solid #eef0e6;margin-bottom:6px}

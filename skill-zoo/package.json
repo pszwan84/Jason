@@ -12,6 +12,7 @@
     "lint": "oxlint",
     "typecheck": "tsc --noEmit --incremental false",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
+    "test:evaluation": "node --experimental-strip-types --test tests/evaluation/*.test.ts",
     "format": "oxfmt"
   },
   "dependencies": {

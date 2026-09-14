@@ -26,4 +26,11 @@
 .heat-strip small{color:#a07840;font-size:9px}
 .heat-strip span{font-size:10px;color:#8b917f}
 .like-on{color:#b77852;border-color:#e2c4ae}
+.skill-card.as-card{position:relative}
+.card-stamp{position:absolute;top:8px;right:12px;font-size:8px;letter-spacing:1.4px;color:#b7bba8}
+.coach-log{margin-top:16px;display:flex;flex-direction:column;gap:8px}
+.coach-bubble{background:#f4f6ec;border-radius:10px;padding:10px 12px}
+.coach-bubble.me{background:#eef3e2}
+.coach-bubble b{font-size:11px;display:block;margin-bottom:4px;color:#6a7858}
+.coach-bubble p{margin:0;font-size:12px;white-space:pre-wrap}
 

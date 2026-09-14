@@ -19,8 +19,8 @@ test('heat formula is 10 likes + 6 comments + 15 exchanges', () => {
   assert.equal(heatOf({ likes: 18, comments: 5, exchanges: 8 }), 10 * 18 + 6 * 5 + 15 * 8);
 });
 
-test('catalog has 18 skills across six halls and a shaped leaderboard', () => {
-  assert.equal(CATALOG.length, 18);
+test('catalog is a full mock mall across six halls with a shaped leaderboard', () => {
+  assert.ok(CATALOG.length >= 40);
   const halls = new Set(CATALOG.map((s) => s.category));
   assert.equal(halls.size, 6);
   const heats = CATALOG.map((s) => catalogHeat(s, emptySocial())).sort((a, b) => b - a);

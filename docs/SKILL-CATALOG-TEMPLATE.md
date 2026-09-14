@@ -5,7 +5,7 @@
 - `D:\资料\项目与代码\Jason\skill-zoo\data\people.json` — 作者
 - `D:\资料\项目与代码\Jason\skill-zoo\data\skills.json` — Skill
 
-当前种子：8 人 × 18 条（6 馆 × 3）。热度开场分层：3 热 / 8 中 / 7 冷。
+当前种子：13 人 × 50 条。货来自演示馆区 + 本机真实方法蒸馏（公众号深读、横纵分析、网文质检等），写成知乎口吻的 5 步，不是 SKILL.md 安装包。
 
 ## 一条 Skill 必填
 

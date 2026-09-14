@@ -124,7 +124,7 @@
 
 路演改走 SkillHub **操作**（逛货架、看热度、交换、加好友），不是 SkillHub 下载站。
 
-- Mock 货架：`skill-zoo/data/skills.json`（18）+ `people.json`（8）。换货只改 JSON。
+- Mock 货架：`skill-zoo/data/skills.json`（50）+ `people.json`（13）。换货只改 JSON。本机真实方法已蒸馏进货架。
 - 热度 = 10×赞 + 6×评 + 15×成交交换。只买商城排序，不买货。
 - 完全开放可直接收入沉淀；交换后开放 / 贡献后开放必须走交换卡。对方同意在本机模拟。
 - 好友只能从成交交换后「加为同行」，没有通讯录。

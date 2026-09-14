@@ -9,7 +9,7 @@
 const KEY = 'skill-zoo:v1';
 
 // 允许落盘的字段白名单：只放能安全 JSON 化的内容
-const SKILL_FIELDS = ['id','title','category','color','author','role','days','cases','tag','desc','update','label','owner','steps','limits','source','story','example','counterexample','parentIds','createdAt'];
+const SKILL_FIELDS = ['id','title','authorId','category','color','icon','author','role','days','cases','tag','desc','update','label','owner','steps','limits','source','story','example','counterexample','parentIds','createdAt'];
 
 export function slimSkills<T extends Record<string, unknown>>(list: T[]): Record<string, unknown>[] {
   return list.map((s) => {

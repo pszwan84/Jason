@@ -15,8 +15,8 @@
 - Lint baseline: 28 errors across the page and existing UI primitives; not yet fixed.
 - Existing trailing blank-line findings remain in the root README and global styles. Typecheck generated `skill-zoo/tsconfig.tsbuildinfo`; retain it locally and do not include it in a commit.
 - The user approved implementation with “实施”. The local demo scope below is authorized; server/database/deployment remain outside scope.
-- Domain foundation is now implemented and tested in `skill-zoo/lib/model.ts`, `lib/domain.ts`, `lib/fixtures.ts`, `lib/storage.ts`, `lib/zoo-store.ts`, `lib/navigation.ts` and `lib/bilateral-match.ts`.
-- The legacy `app/page.tsx` remains the active visual shell. New feature components (`components/zoo/`) are isolated and typecheck, but are not yet mounted as the primary page flow; do not claim the full browser lifecycle is delivered until that integration is complete.
+- Active shell is still `app/page.tsx`. Catalog lives in `skill-zoo/data/{skills,people}.json` (18 skills, 8 people). Heat, likes, comments, exchange unlock and friends are in `lib/heat.ts` + `lib/social.ts`.
+- `components/zoo/` was deleted as unmounted dead code. Do not restore it for this demo.
 
 ## Delivery scope — approved by the user on 2026-09-14
 Deliver an offline-capable, single-browser demo with the existing six-screen visual design. Present local persistence, sample data, rules-based extraction and simulated counterpart approval accurately.

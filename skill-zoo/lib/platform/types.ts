@@ -1,0 +1,27 @@
+export const categories = ['科研', '法律', '设计', '商业', '工程', '教育'] as const;
+export type SkillBody = { title: string; category: string; tags: string; problem: string; input: string; output: string; steps: string; example: string; limits: string; change: string };
+export type User = { id: string; email: string; name: string; bio: string; admin: boolean; canGenerate: boolean };
+export type Skill = { id: string; owner_id: string; title: string; category: string; tags: string; body: string; status: 'draft'|'published'|'hidden'; revision: number; created: number; updated: number; author: string; favorite: number; matchFields?: string[]; matchReason?: string; matchScore?: number };
+export type Feedback = { id: string; name: string; kind: string; body: string; created: number };
+export type Version = { revision: number; body: string; created: number };
+export type SkillQuality = {
+  score: number;
+  label: '待验证'|'初步验证'|'多人验证';
+  confidence: '低'|'中'|'高';
+  feedbackCount: number;
+  caseCount: number;
+  helpfulCount: number;
+  unfitCount: number;
+  versionCount: number;
+  contributorCount: number;
+  source: string;
+  sourceVerified: boolean;
+  signals: string[];
+};
+export type Detail = { skill: Skill; feedback: Feedback[]; versions: Version[]; related: Skill[]; contributors: {id: string; name: string}[]; quality: SkillQuality };
+export type Exchange = { id: string; skill_id: string|null; skill_title?: string|null; sender: string; recipient: string; body: string; status: string; created: number; sender_name: string; recipient_name: string };
+export type Task = { id: string; exchange_id: string; title: string; done: number };
+export type Notice = { id: string; body: string; read: number; created: number };
+export type Report = { id: string; skill_id: string; title: string; reason: string; status: string };
+export type Job = { id: string; status: string; progress?: number; modelUrl?: string; imageUrl?: string; task_id?: string|null };
+export const emptySkill: SkillBody = { title:'', category:'科研', tags:'', problem:'', input:'', output:'', steps:'', example:'', limits:'', change:'' };

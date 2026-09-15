@@ -2,28 +2,32 @@ import { sites } from '@openai/sites-vite-plugin';
 import tailwindcss from '@tailwindcss/postcss';
 import vinext from 'vinext';
 import { defineConfig } from 'vite';
+import { fileURLToPath } from 'node:url';
 import hostingConfig from './.openai/hosting.json';
 
 const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
   '00000000-0000-4000-8000-000000000000';
 
 const { d1, r2 } = hostingConfig;
+const nodeDev = process.env.ZOO_NODE_DEV === '1';
+const apiPort = process.env.ZOO_API_PORT ?? '3101';
 
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === 'seatbelt';
 
 const localBindingConfig = {
   main: 'vinext/server/fetch-handler',
+  compatibility_date: '2026-05-01',
   compatibility_flags: ['nodejs_compat'],
   d1_databases: d1
     ? [
         {
-          binding: d1,
+          binding: 'DB',
           database_name: 'site-creator-d1',
           database_id: SITE_CREATOR_PLACEHOLDER_DATABASE_ID,
         },
       ]
-    : [],
+    : [{ binding: 'DB', database_name: 'skill-zoo-local', database_id: '00000000-0000-4000-8000-000000000001' }],
   r2_buckets: r2
     ? [
         {
@@ -45,14 +49,13 @@ export default defineConfig(async () => {
   const { cloudflare } = await import('@cloudflare/vite-plugin');
 
   return {
+    resolve: nodeDev ? { alias: { 'cloudflare:workers': fileURLToPath(new URL('./scripts/cloudflare-local.ts', import.meta.url)) } } : undefined,
     css: { postcss: { plugins: [tailwindcss()] } },
-    server: isCodexSeatbeltSandbox
-      ? { watch: { useFsEvents: false, usePolling: true } }
-      : undefined,
+    server: { watch: isCodexSeatbeltSandbox ? { useFsEvents: false, usePolling: true } : undefined, proxy: nodeDev ? { '/api/platform': `http://127.0.0.1:${apiPort}` } : undefined },
     plugins: [
       vinext(),
       sites(),
-      cloudflare({
+      !nodeDev && cloudflare({
         viteEnvironment: { name: 'rsc', childEnvironments: ['ssr'] },
         config: localBindingConfig,
       }),
